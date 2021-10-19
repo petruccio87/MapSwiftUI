@@ -6,11 +6,25 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct ContentView: View {
+    
+    @ObservedObject private var locationManager = LocationManager()
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        
+        let coordinate = self.locationManager.location != nil ?
+            self.locationManager.location!.coordinate : CLLocationCoordinate2D()
+        
+        ZStack{
+            MapView()
+            Text("\(coordinate.latitude), \(coordinate.longitude)")
+                .foregroundColor(.white)
+                .padding()
+                .background(Color.green)
+                .cornerRadius(10)
+        }
     }
 }
 
