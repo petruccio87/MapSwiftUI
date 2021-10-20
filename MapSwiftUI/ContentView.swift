@@ -19,11 +19,11 @@ struct ContentView: View {
         
         ZStack{
             MapView()
-            Text("\(coordinate.latitude), \(coordinate.longitude)")
-                .foregroundColor(.white)
-                .padding()
-                .background(Color.green)
-                .cornerRadius(10)
+//            Text("\(coordinate.latitude), \(coordinate.longitude)")
+//                .foregroundColor(.white)
+//                .padding()
+//                .background(Color.green)
+//                .cornerRadius(10)
         }
     }
 }

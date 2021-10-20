@@ -10,6 +10,10 @@ import MapKit
 
 struct MapView: UIViewRepresentable {
     
+    struct Holder {
+        var trackingUserLocation = true
+    }
+    
     func makeUIView(context: Context) -> MKMapView {
         let map = MKMapView()
         map.showsUserLocation = true
@@ -21,7 +25,7 @@ struct MapView: UIViewRepresentable {
         Coordinator(self)
     }
     
-    func updateUIView(_ uiView: MKMapView, context: Context) {
+    func updateUIView(_ mapView: MKMapView, context: Context) {
         
     }
 }
