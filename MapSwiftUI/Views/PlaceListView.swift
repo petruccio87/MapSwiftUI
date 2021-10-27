@@ -29,6 +29,8 @@ struct PlaceListView: View {
                         Text(landmark.name)
                             .fontWeight(.bold)
                         Text(landmark.title)
+                    }.onTapGesture {
+                        print(landmark.name, landmark.id)
                     }
                 }
             }.animation(nil)

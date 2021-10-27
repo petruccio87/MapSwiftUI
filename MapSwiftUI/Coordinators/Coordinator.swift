@@ -34,6 +34,9 @@ final class Coordinator: NSObject, MKMapViewDelegate {
 //            mapView.setCenter(userLocation.coordinate, animated: true)
         }
     }
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        print("select annotation \(view.annotation?.title)")
+    }
 }
 
 
