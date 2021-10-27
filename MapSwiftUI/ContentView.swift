@@ -62,7 +62,8 @@ struct ContentView: View {
                 self.tapped.toggle()
             }) {
                 //onDrag
-            }.gesture(DragGesture().onEnded() { value in
+            }.gesture(DragGesture().onChanged() { value in
+                
                 if value.location.y < -100 {
 //                    print("drag to open")
                     self.tapped = true
