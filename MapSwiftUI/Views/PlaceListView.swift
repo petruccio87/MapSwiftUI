@@ -12,6 +12,7 @@ struct PlaceListView: View {
     
     let landmarks: [Landmark]
     var onTap: () -> ()
+    var onDrag: () -> ()
     
     var body: some View {
         VStack(alignment: .leading){
@@ -22,7 +23,8 @@ struct PlaceListView: View {
             .gesture(TapGesture()
                         .onEnded(onTap))
             List{
-                ForEach( landmarks, id: \.id) { landmark in
+                //ForEach( landmarks, id: \.id) { landmark in -> makes list always scroll to top themself
+                ForEach( landmarks, id: \.self) { landmark in
                     VStack(alignment: .leading) {
                         Text(landmark.name)
                             .fontWeight(.bold)
@@ -36,6 +38,6 @@ struct PlaceListView: View {
 
 struct PlaceListView_Previews: PreviewProvider {
     static var previews: some View {
-        PlaceListView(landmarks: [Landmark(placemark: MKPlacemark())], onTap: {})
+        PlaceListView(landmarks: [Landmark(placemark: MKPlacemark())], onTap: {}, onDrag: {})
     }
 }

@@ -57,10 +57,22 @@ struct ContentView: View {
                 .padding()
                 .offset(y: 44)
             
-            PlaceListView(landmarks: self.landmarks) {
+            PlaceListView(landmarks: self.landmarks, onTap: {
                 //onTap
                 self.tapped.toggle()
-            }.animation(.spring())
+            }) {
+                //onDrag
+            }.gesture(DragGesture().onEnded() { value in
+                if value.location.y < -100 {
+//                    print("drag to open")
+                    self.tapped = true
+                }
+                if value.location.y > 100 {
+//                    print("drag to close")
+                    self.tapped = false
+                }
+            })
+            .animation(.spring())
             .offset(y: calculateOffset())
 //            Text("\(coordinate.latitude), \(coordinate.longitude)")
 //                .foregroundColor(.white)
