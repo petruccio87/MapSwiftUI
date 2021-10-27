@@ -10,9 +10,9 @@ import MapKit
 
 final class Coordinator: NSObject, MKMapViewDelegate {
     
-    var control : MapView
+    var control : MyMKMapView
     
-    init(_ control: MapView) {
+    init(_ control: MyMKMapView) {
         self.control = control
     }
     
@@ -28,9 +28,9 @@ final class Coordinator: NSObject, MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        if mapView.region.center != userLocation.coordinate {
-//            let region = MKCoordinateRegion(center: userLocation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
-//            mapView.setRegion(region, animated: true)
+        if mapView.region.center != userLocation.coordinate && self.control.myuserTrackingMode != .none {
+            let region = MKCoordinateRegion(center: userLocation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+            mapView.setRegion(region, animated: true)
 //            mapView.setCenter(userLocation.coordinate, animated: true)
         }
     }
