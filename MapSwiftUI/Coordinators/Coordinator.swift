@@ -31,7 +31,7 @@ final class Coordinator: NSObject, MKMapViewDelegate {
         if mapView.region.center != userLocation.coordinate {
 //            let region = MKCoordinateRegion(center: userLocation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
 //            mapView.setRegion(region, animated: true)
-            mapView.setCenter(userLocation.coordinate, animated: true)
+//            mapView.setCenter(userLocation.coordinate, animated: true)
         }
     }
 }

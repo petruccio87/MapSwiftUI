@@ -18,6 +18,7 @@ struct MapView: UIViewRepresentable {
     func makeUIView(context: Context) -> MKMapView {
         let map = MKMapView()
         map.showsUserLocation = true
+        map.showsScale = true
         map.delegate = context.coordinator
         return map
     }
