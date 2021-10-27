@@ -8,7 +8,7 @@
 import Foundation
 import MapKit
 
-struct Landmark {
+struct Landmark: Hashable {
     
     let placemark: MKPlacemark
     
