@@ -35,11 +35,12 @@ struct ContentView: View {
             self.locationManager.location!.coordinate : CLLocationCoordinate2D()
         
         ZStack(alignment: .top) {
-            MapView()
+            MapView(landmarks: landmarks)
             TextField("Search", text: $search, onEditingChanged: { _ in })
             {
-                //commit
-            }.textFieldStyle(RoundedBorderTextFieldStyle())
+                self.getNearByLandmarks()
+            }
+            .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
                 .offset(y: 44)
 //            Text("\(coordinate.latitude), \(coordinate.longitude)")

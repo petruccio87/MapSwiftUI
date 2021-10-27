@@ -10,7 +10,7 @@ import UIKit
 
 final class LandmarkAnnotation: NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
-    let title: String? = nil
+    let title: String?
     init(landmark: Landmark){
         title = landmark.name
         coordinate = landmark.coordinate
