@@ -35,7 +35,7 @@ final class Coordinator: NSObject, MKMapViewDelegate {
         }
     }
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        print("select annotation \(view.annotation?.title)")
+        print("select annotation \(String(describing: view.annotation?.title ?? "no annotation"))")
     }
 }
 

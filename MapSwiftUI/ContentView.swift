@@ -13,7 +13,6 @@ struct ContentView: View {
     @ObservedObject private var locationManager = LocationManager()
     @State private var search: String  = ""
     @State private var landmarks = [Landmark]()
-    @State private var tapped = false
     
     private func getNearByLandmarks() {
         let request = MKLocalSearch.Request()
@@ -30,21 +29,13 @@ struct ContentView: View {
         }
     }
     
-    private func calculateOffset() -> CGFloat {
-        if self.landmarks.count > 0 && !self.tapped {
-            return UIScreen.main.bounds.size.height - UIScreen.main.bounds.size.height / 4
-        } else if self.tapped {
-            return 100
-        } else {
-            return UIScreen.main.bounds.size.height
-        }
-    }
+    
         
     
     var body: some View {
         
-        let coordinate = self.locationManager.location != nil ?
-            self.locationManager.location!.coordinate : CLLocationCoordinate2D()
+//        let coordinate = self.locationManager.location != nil ?
+//            self.locationManager.location!.coordinate : CLLocationCoordinate2D()
         
         ZStack(alignment: .top) {
             MapView(landmarks: landmarks)
@@ -56,25 +47,24 @@ struct ContentView: View {
             .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
                 .offset(y: 44)
+            PlaceList(landmarks: landmarks)
+//            PlaceListView(landmarks: self.landmarks, onTap: {
+//                //onTap
+//                self.tapped.toggle()
+//            }) { value in
+//                //onDrag
+//                if value.location.y < -100 {
+////                    print("drag to open")
+//                    self.tapped = true
+//                }
+//                if value.location.y > 100 {
+////                    print("drag to close")
+//                    self.tapped = false
+//                }
+//            }
+//            .animation(.spring())
+//            .offset(y: calculateOffset())
             
-            PlaceListView(landmarks: self.landmarks, onTap: {
-                //onTap
-                self.tapped.toggle()
-            }) {
-                //onDrag
-            }.gesture(DragGesture().onChanged() { value in
-                
-                if value.location.y < -100 {
-//                    print("drag to open")
-                    self.tapped = true
-                }
-                if value.location.y > 100 {
-//                    print("drag to close")
-                    self.tapped = false
-                }
-            })
-            .animation(.spring())
-            .offset(y: calculateOffset())
 //            Text("\(coordinate.latitude), \(coordinate.longitude)")
 //                .foregroundColor(.white)
 //                .padding()
@@ -86,6 +76,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().preferredColorScheme(.light)
+        ContentView().preferredColorScheme(.dark)
     }
 }
