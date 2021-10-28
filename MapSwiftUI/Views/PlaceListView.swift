@@ -10,37 +10,57 @@ import MapKit
 
 struct PlaceList: View {
     let landmarks: [Landmark]
-    @State private var tapped = false
+    @State private var open = false
+    @State private var isDragging = false
+    @State private var transition: CGFloat = 0
 
 
     private func calculateOffset() -> CGFloat {
-        if self.landmarks.count > 0 && !self.tapped {
-            return UIScreen.main.bounds.size.height - UIScreen.main.bounds.size.height / 4
-        } else if self.tapped {
-            return 100
+        if isDragging {
+            if self.open {
+                return 100 + transition
+            } else {
+                return UIScreen.main.bounds.size.height - UIScreen.main.bounds.size.height / 4 + transition
+            }
         } else {
-            return UIScreen.main.bounds.size.height
+            if self.landmarks.count > 0 && !self.open {
+                return UIScreen.main.bounds.size.height - UIScreen.main.bounds.size.height / 4
+            } else if self.open {
+                return 100
+            } else {
+                return UIScreen.main.bounds.size.height
+            }
         }
     }
     
     var body: some View {
         PlaceListView(landmarks: self.landmarks, onTap: {
             //onTap
-            self.tapped.toggle()
-        }) { value in
-            //onDrag
+            self.open.toggle()
+        }, onDrag: { value in
+            isDragging = true
+            self.transition = value.location.y - value.startLocation.y
+//            print(transition)
+            print("start drag")
             if value.location.y < -100 {
 //                    print("drag to open")
-                self.tapped = true
+                self.open = true
             }
             if value.location.y > 100 {
 //                    print("drag to close")
-                self.tapped = false
+                self.open = false
             }
-        }
+        }, onDragEnd: { value in
+            isDragging = false
+//            print("end drag")
+        })
         .animation(.spring())
         .offset(y: calculateOffset())    }
 }
+
+
+
+
 
 struct PlaceListView: View {
     @Environment(\.colorScheme) var colorScheme
@@ -50,6 +70,7 @@ struct PlaceListView: View {
     let landmarks: [Landmark]
     var onTap: () -> ()
     var onDrag: (DragGesture.Value) -> ()
+    var onDragEnd: (DragGesture.Value) -> ()
     
     var body: some View {
         VStack(alignment: .leading){
@@ -59,7 +80,7 @@ struct PlaceListView: View {
             .background(Color.gray)
             .gesture(TapGesture()
                         .onEnded(onTap))
-            .gesture(DragGesture().onChanged(onDrag))
+            .gesture(DragGesture().onChanged(onDrag).onEnded(onDragEnd))
             List{
                 //ForEach( landmarks, id: \.id) { landmark in -> makes list always scroll to top themself
                 ForEach( landmarks, id: \.self) { landmark in
