@@ -12,16 +12,21 @@ struct PlaceList: View {
     let landmarks: [Landmark]
     @State private var open = false
     @State private var isDragging = false
-    @State private var transition: CGFloat = 0
+    @State private var transition: CGFloat = .zero
 
 
     private func calculateOffset() -> CGFloat {
         if isDragging {
-            if self.open {
-                return 100 + transition
-            } else {
-                return UIScreen.main.bounds.size.height - UIScreen.main.bounds.size.height / 4 + transition
-            }
+            return transition
+//            if self.open {
+//                if transition > 0 {
+//                    return 100 + transition
+//                } else { return 100 }
+//            } else {
+//                if transition < 0 {
+//                    return UIScreen.main.bounds.size.height - UIScreen.main.bounds.size.height / 4 + transition
+//                } else { return UIScreen.main.bounds.size.height - UIScreen.main.bounds.size.height / 4 }
+//            }
         } else {
             if self.landmarks.count > 0 && !self.open {
                 return UIScreen.main.bounds.size.height - UIScreen.main.bounds.size.height / 4
@@ -36,26 +41,36 @@ struct PlaceList: View {
     var body: some View {
         PlaceListView(landmarks: self.landmarks, onTap: {
             //onTap
-            self.open.toggle()
+            withAnimation {
+                self.open.toggle()
+            }
         }, onDrag: { value in
             isDragging = true
-            self.transition = value.location.y - value.startLocation.y
-//            print(transition)
+            self.transition = value.location.y
+            var translation = value.translation.height
+            print(transition)
             print("start drag")
-            if value.location.y < -100 {
-//                    print("drag to open")
-                self.open = true
+            if translation < -100 {
+                    print("drag to open")
+                withAnimation {
+                    self.open = true
+                }
             }
-            if value.location.y > 100 {
-//                    print("drag to close")
-                self.open = false
+            if translation > 100 {
+                    print("drag to close")
+                withAnimation {
+                    self.open = false
+                }
             }
         }, onDragEnd: { value in
             isDragging = false
-//            print("end drag")
+            transition = .zero
+            print("end drag")
         })
-        .animation(.spring())
-        .offset(y: calculateOffset())    }
+        .animation(.default)
+        .offset(y: calculateOffset())
+        
+    }
 }
 
 
@@ -80,7 +95,7 @@ struct PlaceListView: View {
             .background(Color.gray)
             .gesture(TapGesture()
                         .onEnded(onTap))
-            .gesture(DragGesture().onChanged(onDrag).onEnded(onDragEnd))
+            .gesture(DragGesture(coordinateSpace: .named("main")).onChanged(onDrag).onEnded(onDragEnd))
             List{
                 //ForEach( landmarks, id: \.id) { landmark in -> makes list always scroll to top themself
                 ForEach( landmarks, id: \.self) { landmark in
@@ -93,7 +108,7 @@ struct PlaceListView: View {
                         print(landmark.name, landmark.id)
                     }
                 }
-            }.animation(nil)
+            }
         }.cornerRadius(cornerRadius)
         .background(RoundedRectangle(cornerRadius: cornerRadius).fill(backgroundColor))
     }

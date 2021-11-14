@@ -16,6 +16,7 @@
 		847992D8271EB68600D90661 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847992D7271EB68600D90661 /* MapView.swift */; };
 		847992DB271EB88B00D90661 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847992DA271EB88B00D90661 /* Coordinator.swift */; };
 		847992DE271EBA4D00D90661 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847992DD271EBA4D00D90661 /* LocationManager.swift */; };
+		84A01E2B274005C20094FF7B /* MovebaleCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A01E2A274005C20094FF7B /* MovebaleCircle.swift */; };
 		84B298C127295D1900085F25 /* Landmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B298C027295D1900085F25 /* Landmark.swift */; };
 		84B298C327295E2000085F25 /* LandmarkAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B298C227295E2000085F25 /* LandmarkAnnotation.swift */; };
 		84B298C5272966B300085F25 /* PlaceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B298C4272966B300085F25 /* PlaceListView.swift */; };
@@ -54,6 +55,7 @@
 		847992D7271EB68600D90661 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		847992DA271EB88B00D90661 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		847992DD271EBA4D00D90661 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		84A01E2A274005C20094FF7B /* MovebaleCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovebaleCircle.swift; sourceTree = "<group>"; };
 		84B298C027295D1900085F25 /* Landmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Landmark.swift; sourceTree = "<group>"; };
 		84B298C227295E2000085F25 /* LandmarkAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkAnnotation.swift; sourceTree = "<group>"; };
 		84B298C4272966B300085F25 /* PlaceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListView.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 			children = (
 				847992D7271EB68600D90661 /* MapView.swift */,
 				84B298C4272966B300085F25 /* PlaceListView.swift */,
+				84A01E2A274005C20094FF7B /* MovebaleCircle.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 			files = (
 				847992DB271EB88B00D90661 /* Coordinator.swift in Sources */,
 				847992AE271EB4BD00D90661 /* ContentView.swift in Sources */,
+				84A01E2B274005C20094FF7B /* MovebaleCircle.swift in Sources */,
 				84B298C5272966B300085F25 /* PlaceListView.swift in Sources */,
 				84B298C327295E2000085F25 /* LandmarkAnnotation.swift in Sources */,
 				847992DE271EBA4D00D90661 /* LocationManager.swift in Sources */,

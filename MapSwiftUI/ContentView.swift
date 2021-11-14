@@ -44,6 +44,7 @@ struct ContentView: View {
             {
                 self.getNearByLandmarks()
             }
+//            .foregroundColor(.accentColor)
             .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
                 .offset(y: 44)
@@ -70,7 +71,7 @@ struct ContentView: View {
 //                .padding()
 //                .background(Color.green)
 //                .cornerRadius(10)
-        }
+        }.coordinateSpace(name: "main")
     }
 }
 
